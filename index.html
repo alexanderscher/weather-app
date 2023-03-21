@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Weather Dashboard</h1>
+      <form>
+        <input type="text" placeholder="Enter a city name..." />
+        <button type="submit">Search</button>
+      </form>
+    </header>
+    <main>
+      <h2>Current Weather</h2>
+      <div class="current-weather">
+        <p><strong>City:</strong> <span id="city"></span></p>
+        <p><strong>Temperature:</strong> <span id="temperature"></span></p>
+        <p><strong>Humidity:</strong> <span id="humidity"></span></p>
+        <p><strong>Wind Speed:</strong> <span id="wind-speed"></span></p>
+      </div>
+      <h2>5-Day Forecast</h2>
+      <div class="forecast"></div>
+    </main>
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>

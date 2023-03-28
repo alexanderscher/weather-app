@@ -9,6 +9,7 @@ var forecast = document.querySelector(".forecast");
 var date = document.querySelector("#date");
 var button = document.querySelector("button");
 var input = document.querySelector("input");
+var current = document.querySelector(".current-weather");
 
 function dayAppend(city, today, weatherType, temp, humidity, wind) {
   cit.innerHTML = city;
@@ -80,7 +81,7 @@ function getCity(input) {
         });
 
       var forecastEndpoint = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
-
+      forecast.innerHTML = "";
       fetch(forecastEndpoint)
         .then(function (response) {
           return response.json();
@@ -149,4 +150,4 @@ function search(event) {
 
 button.addEventListener("click", search);
 
-// getStorage();
+getStorage();

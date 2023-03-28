@@ -1,6 +1,7 @@
 body {
   font-family: Arial, sans-serif;
   margin: 0;
+  transition: all 0.3s ease;
 }
 
 header {
@@ -46,6 +47,8 @@ main {
   border-radius: 5px;
   padding: 20px;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .current-weather p {
@@ -54,11 +57,10 @@ main {
 
 .forecast {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
 }
 
-.forecast-card {
+.forecast-data {
   background-color: #f0f0f0;
   border-radius: 5px;
   padding: 10px;
@@ -67,6 +69,9 @@ main {
   box-sizing: border-box;
 }
 
-.forecast-card p {
-  margin: 5px 0;
+@media (max-width: 600px) {
+  .forecast-data {
+    width: 100%;
+    flex-basis: 100%;
+  }
 }

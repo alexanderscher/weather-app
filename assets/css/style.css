@@ -1,7 +1,6 @@
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  transition: all 0.3s ease;
 }
 
 header {
@@ -60,6 +59,11 @@ main {
   flex-wrap: wrap;
 }
 
+.wi {
+  font-size: 26px;
+  margin-top: 10px;
+}
+
 .forecast-data {
   background-color: #f0f0f0;
   border-radius: 5px;
@@ -67,6 +71,8 @@ main {
   margin: 10px;
   flex-basis: calc(33.33% - 20px);
   box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
 }
 
 @media (max-width: 600px) {

@@ -10,6 +10,7 @@ var date = document.querySelector("#date");
 var button = document.querySelector("button");
 var input = document.querySelector("input");
 var current = document.querySelector(".current-weather");
+var weatherIcon = document.getElementById("weather-icon");
 
 function dayAppend(city, today, weatherType, temp, humidity, wind) {
   cit.innerHTML = city;
@@ -18,6 +19,10 @@ function dayAppend(city, today, weatherType, temp, humidity, wind) {
   tem.innerHTML = temp + "°F";
   humid.innerHTML = humidity + "%";
   win.innerHTML = wind + "mph";
+
+  var type = weatherType.toLowerCase();
+  console.log(type);
+  weatherIcon.className = `wi wi-day-${weatherType.toLowerCase()}`;
 }
 
 function forecastAppend(temp, humidity, wind, weatherType, reformattedDate) {
@@ -41,24 +46,36 @@ function forecastAppend(temp, humidity, wind, weatherType, reformattedDate) {
   inDiv.append(windF);
   outDiv.append(inDiv);
   forecast.append(outDiv);
+
+  var icon = document.createElement("div");
+  icon.className = "weather-icons";
+
+  var i = document.createElement("i");
+  i.id = "weather-icon";
+
+  var type = weatherType.toLowerCase();
+  i.className = `wi wi-day-${weatherType.toLowerCase()}`;
+  icon.append(i);
+  outDiv.append(icon);
+  forecast.append(outDiv);
 }
 
 function getCity(input) {
   var cityEndpoint = `http://api.openweathermap.org/geo/1.0/direct?q=${input}&appid=${apiKey}`;
   fetch(cityEndpoint)
-    .then(function (response) {
+    .then((response) => {
       return response.json();
     })
-    .then(function (data) {
+    .then((data) => {
       var lon = data[0].lon;
       var lat = data[0].lat;
       var todayEndpoint = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
       fetch(todayEndpoint)
-        .then(function (response) {
+        .then((response) => {
           return response.json();
         })
-        .then(function (data) {
+        .then((data) => {
           var kelvin = data.main.temp;
           var temp = Math.round((kelvin - 273.15) * 9) / 5 + 32;
           var city = `${data.name}, ${data.sys.country}`;
@@ -83,14 +100,16 @@ function getCity(input) {
       var forecastEndpoint = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
       forecast.innerHTML = "";
       fetch(forecastEndpoint)
-        .then(function (response) {
+        .then((response) => {
           return response.json();
         })
-        .then(function (data) {
+        .then((data) => {
           var checkedDates = [];
           var storage = [];
 
-          data.list.forEach(function (x) {
+          index = 0;
+
+          data.list.forEach((x) => {
             var dates = x.dt_txt.split(" ");
             var kelvin = x.main.temp;
             var temp = Math.round((kelvin - 273.15) * 9) / 5 + 32;
@@ -100,28 +119,33 @@ function getCity(input) {
 
             if (checkedDates.includes(dates[0])) {
             } else {
-              checkedDates.push(dates[0]);
-              var date = dayjs(dates[0]);
-              var reformattedDate = date.format("MM-DD-YYYY");
-              forecastAppend(
-                temp,
-                humidity,
-                wind,
-                weatherType,
-                reformattedDate
-              );
+              if (index < 5) {
+                console.log(index);
+                index++;
+                checkedDates.push(dates[0]);
+                var date = dayjs(dates[0]);
+                console.log(date);
+                var reformattedDate = date.format("MM-DD-YYYY");
+                forecastAppend(
+                  temp,
+                  humidity,
+                  wind,
+                  weatherType,
+                  reformattedDate
+                );
 
-              forecastStorage = {
-                date: reformattedDate,
-                temp: temp,
-                humidity: humidity,
-                wind: wind,
-                weatherType: weatherType,
-                city: input,
-              };
-              storage.push(forecastStorage);
+                forecastStorage = {
+                  date: reformattedDate,
+                  temp: temp,
+                  humidity: humidity,
+                  wind: wind,
+                  weatherType: weatherType,
+                  city: input,
+                };
+                storage.push(forecastStorage);
+              }
+              localStorage.setItem("forecast", JSON.stringify(storage));
             }
-            localStorage.setItem("forecast", JSON.stringify(storage));
           });
         });
     });

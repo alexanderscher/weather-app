@@ -13,7 +13,6 @@ var current = document.querySelector(".current-weather");
 var weatherIcon = document.getElementById("weather-icon");
 var recent = document.querySelector(".recent-searches");
 var pastCities = document.querySelector(".past-cities");
-
 var past = [];
 
 function dayAppend(city, today, weatherType, temp, humidity, wind) {

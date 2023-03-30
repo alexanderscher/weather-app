@@ -111,8 +111,9 @@
 .wi-day-rain-wind:before {
   content: "\f007";
 }
-.wi-day-showers:before {
+.wi-day-drizzle:before {
   content: "\f009";
+  color: rgb(50, 50, 233);
 }
 .wi-day-sleet:before {
   content: "\f0b2";

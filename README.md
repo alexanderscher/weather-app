@@ -18,3 +18,5 @@ HTML/CSS - The app's user interface is built using HTML and CSS.
 JavaScript - The app uses JavaScript to retrieve data from the API and update the user interface.
 
 erikflowers - CSS weather icons.
+
+<img width="1297" alt="Screenshot 2023-03-30 at 5 23 23 PM" src="https://user-images.githubusercontent.com/108595129/228992743-fa720f6f-ad62-49e0-8b74-2ab473e18219.png">

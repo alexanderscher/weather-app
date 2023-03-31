@@ -74,7 +74,7 @@ function pastSearch(city) {
 }
 
 function getCity(input) {
-  var cityEndpoint = `http://api.openweathermap.org/geo/1.0/direct?q=${input}&appid=${apiKey}`;
+  var cityEndpoint = `https://api.openweathermap.org/geo/1.0/direct?q=${input}&appid=${apiKey}`;
   fetch(cityEndpoint)
     .then((response) => {
       return response.json();
@@ -114,7 +114,7 @@ function getCity(input) {
           dayAppend(city, today, weatherType, temp, humidity, wind);
         });
 
-      var forecastEndpoint = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+      var forecastEndpoint = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
       forecast.innerHTML = "";
       fetch(forecastEndpoint)
         .then((response) => {
